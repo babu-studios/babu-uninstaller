@@ -1,0 +1,86 @@
+name: Build and publish macOS release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  arm64:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm rebuild esbuild
+      - run: node node_modules/electron/install.js
+      - run: npm run build
+      - run: npm run icon
+      - run: npx electron-builder --mac dmg --arm64 --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dmg-arm64
+          path: release/*.dmg
+          if-no-files-found: error
+
+  x64:
+    runs-on: macos-15-intel
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm rebuild esbuild
+      - run: node node_modules/electron/install.js
+      - run: npm run build
+      - run: npm run icon
+      - run: npx electron-builder --mac dmg --x64 --publish never
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dmg-x64
+          path: release/*.dmg
+          if-no-files-found: error
+
+  publish:
+    needs: [arm64, x64]
+    runs-on: macos-14
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: dmg-*
+          merge-multiple: true
+          path: release-assets
+      - name: Write checksums and release notes
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          cd release-assets
+          shasum -a 256 *.dmg > SHA256SUMS.txt
+          version="${TAG#v}"
+          cat > release-notes.md <<EOF
+          ## Highlights
+          - Review each app and exact-match leftovers before removing anything.
+          - Move selected items to Trash by default; uncertain matches stay unchecked.
+
+          ## Downloads
+          - [Apple Silicon DMG](https://github.com/babu-studios/babu-uninstaller/releases/download/${TAG}/Babu%20App%20Uninstaller-${version}-arm64.dmg)
+          - [Intel Mac DMG](https://github.com/babu-studios/babu-uninstaller/releases/download/${TAG}/Babu%20App%20Uninstaller-${version}-x64.dmg)
+          - Verify files with \`SHA256SUMS.txt\`.
+
+          ## First launch (unsigned app)
+          - macOS 15 and later: click **Done**, then System Settings → Privacy & Security → **Open Anyway**.
+          - macOS 14 and earlier: right-click the app in Finder and choose **Open**.
+          - Terminal: \`xattr -cr "/Applications/Babu App Uninstaller.app"\`
+          EOF
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: gh release create "$TAG" release-assets/*.dmg release-assets/SHA256SUMS.txt --title "Babu App Uninstaller ${TAG#v}" --notes-file release-assets/release-notes.md

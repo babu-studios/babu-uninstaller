@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.electron.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "types": ["node", "vitest/globals"]
+  },
+  "include": ["tests", "electron", "shared", "vitest.config.ts"]
+}

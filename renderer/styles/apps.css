@@ -1,0 +1,9 @@
+.app-list{height:100%;overflow:auto;padding:7px 13px}
+.app-row{width:100%;min-height:71px;display:flex;align-items:center;gap:13px;padding:10px;border:0;border-bottom:1px solid #ffffff0b;background:transparent;color:inherit;text-align:left;cursor:pointer;transition:background .15s}
+.app-row:last-child{border-bottom:0}.app-row:hover:not(:disabled){background:#ffffff08}.app-row:disabled{cursor:default;opacity:.67}
+.app-icon{width:42px;height:42px;display:grid;place-items:center;flex:none;border:1px solid #ffffff12;border-radius:12px;background:linear-gradient(145deg,#29263a,#1c242e);color:#ac96ff}
+.app-icon img{width:29px;height:29px;object-fit:contain}.app-primary,.app-meta{display:grid;gap:5px}.app-primary{min-width:0;flex:1}.app-primary strong{font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.app-row small{font-size:10px;color:#777984}
+.app-meta{width:132px;text-align:right}.app-meta b{font-size:11px;font-weight:500;color:#c6c5ce}.app-chevron{font-size:22px;color:#696a74}.app-lock{color:#757681;margin:0 4px}
+.permission-notice{display:flex;align-items:center;gap:12px;margin:0 0 15px;padding:12px;border:1px solid #d19e4933;border-radius:9px;background:#d19e490c;color:#e0bf78}
+.permission-notice div{display:grid;gap:4px;flex:1}.permission-notice strong{font-size:11px}.permission-notice span{font-size:10px;color:#aca08a}.permission-notice button{border:0;background:transparent;color:#dfbf7c;font-size:10px;cursor:pointer;white-space:nowrap}
+.drop-overlay{position:fixed;inset:14px;z-index:5;border:2px dashed #9a7bff;border-radius:18px;background:#17151fe8;display:grid;place-items:center;pointer-events:none;color:#eee;font:600 20px Manrope}

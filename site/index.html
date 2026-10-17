@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101114">
+  <meta name="description" content="A safe, open-source macOS app uninstaller. Review every file before it moves to Trash.">
+  <title>Babu App Uninstaller for macOS</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#" aria-label="Babu App Uninstaller home">
+      <svg viewBox="0 0 64 64" role="img" aria-label="Babu gradient logo">
+        <defs><linearGradient id="logo" x1="0" y1="0" x2="1" y2="1">
+          <stop stop-color="#8d5cf6"/><stop offset=".55" stop-color="#506be8"/><stop offset="1" stop-color="#48d5c0"/>
+        </linearGradient></defs>
+        <rect width="64" height="64" rx="19" fill="url(#logo)"/>
+        <path d="M32 12c2.3 12.1 6 17.7 18 20-12 2.3-15.7 7.9-18 20-2.3-12.1-6-17.7-18-20 12-2.3 15.7-7.9 18-20Z" fill="white"/>
+        <path d="M48 9c.9 4.7 2.3 6.8 7 7.7-4.7.9-6.1 3-7 7.7-.9-4.7-2.3-6.8-7-7.7 4.7-.9 6.1-3 7-7.7Z" fill="#fff" opacity=".8"/>
+      </svg><span>Babu <b>Uninstaller</b></span>
+    </a>
+    <a class="nav-link" href="https://github.com/babu-studios/babu-uninstaller">Open source on GitHub ↗</a>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="glow"></div>
+      <p class="eyebrow"><span></span> A lighter Mac starts here</p>
+      <h1>Uninstall apps.<br><em>Keep the control.</em></h1>
+      <p class="intro">Remove an app and its leftovers without the guesswork. See every file first. Move it to Trash when you're ready.</p>
+      <div class="downloads" aria-label="macOS downloads">
+        <a class="download primary-download" data-arch="arm64" href="https://github.com/babu-studios/babu-uninstaller/releases/latest">
+          <span class="apple" aria-hidden="true">●</span><span><strong>Download for Apple Silicon</strong><small data-size="arm64">DMG · checking release…</small></span><b>↓</b>
+        </a>
+        <a class="download secondary-download" data-arch="x64" href="https://github.com/babu-studios/babu-uninstaller/releases/latest">
+          <span class="intel" aria-hidden="true">⌘</span><span><strong>Download for Intel Mac</strong><small data-size="x64">DMG · checking release…</small></span><b>↓</b>
+        </a>
+      </div>
+      <p class="chip-hint">Not sure which Mac you have?  menu → About This Mac. Look for “Chip” or “Processor”.</p>
+      <p id="release-status" class="release-status" aria-live="polite">Latest release: loading</p>
+      <a class="release-link" href="https://github.com/babu-studios/babu-uninstaller/releases/latest">View all releases</a>
+    </section>
+    <section class="features">
+      <article><span>01</span><h2>Nothing happens blindly</h2><p>Review the exact app and related files. Choose precisely what stays and what goes.</p></article>
+      <article><span>02</span><h2>Recoverable by default</h2><p>Selected items move to your Trash. You can restore them from Finder if you change your mind.</p></article>
+      <article><span>03</span><h2>Careful by design</h2><p>System apps stay protected. Uncertain matches are never selected automatically.</p></article>
+    </section>
+    <section class="install" id="install">
+      <p class="eyebrow">FIRST LAUNCH</p><h2>How to install</h2>
+      <p>Open the DMG, drag Babu App Uninstaller to Applications, then eject the disk image. This build is unsigned and not notarized.</p>
+      <div class="install-steps">
+        <p><b>macOS 15 and later</b><br>Click <strong>Done</strong>, then open System Settings → Privacy &amp; Security → <strong>Open Anyway</strong>.</p>
+        <p><b>macOS 14 and earlier</b><br>In Finder, right-click the app and choose <strong>Open</strong>.</p>
+        <p><b>Terminal</b><br><code>xattr -cr "/Applications/Babu App Uninstaller.app"</code></p>
+      </div>
+    </section>
+    <footer><span>Made with care by Babu Studios</span><a href="https://github.com/babu-studios/babu-uninstaller">MIT License · Source code</a></footer>
+  </main>
+</body>
+</html>
